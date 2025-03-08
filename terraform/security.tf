@@ -1,7 +1,7 @@
 resource "aws_security_group" "sal-mongo_sg" {
   name        = "sal-mongo_sg"
   description = "Security group for MongoDB"
-  vpc_id      = "vpc-09f02049d6176fe30"
+  vpc_id      = var.vpc_id
 
   ingress {
     from_port   = 27017
@@ -21,7 +21,7 @@ resource "aws_security_group" "sal-mongo_sg" {
 resource "aws_security_group" "sal-backend_sg" {
   name        = "sal-backend_sg"
   description = "Security group for Backend"
-  vpc_id      = "vpc-09f02049d6176fe30"
+  vpc_id      = var.vpc_id
 
   ingress {
     from_port   = 3001
@@ -41,7 +41,7 @@ resource "aws_security_group" "sal-backend_sg" {
 resource "aws_security_group" "sal-frontend_sg" {
   name        = "sal-frontend_sg"
   description = "Security group for Frontend"
-  vpc_id      = "vpc-09f02049d6176fe30"
+  vpc_id      = var.vpc_id
 
   ingress {
     from_port   = 3000
@@ -61,7 +61,7 @@ resource "aws_security_group" "sal-frontend_sg" {
 resource "aws_security_group" "sal-jenkins_sg" {
   name        = "sal-jenkins_sg"
   description = "Security group for Jenkins"
-  vpc_id      = "vpc-09f02049d6176fe30"
+  vpc_id      = var.vpc_id
 
   ingress {
     from_port   = 8080

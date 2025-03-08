@@ -23,3 +23,7 @@ variable "jenkins_instance_type" {
 variable "vpc_id" {
   default = "vpc-09f02049d6176fe30"  # Replace with your Default VPC ID
 }
+
+variable "subnet_id" {
+  default = "subnet-08fa616f96d54dfc2"
+}
