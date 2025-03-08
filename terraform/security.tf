@@ -1,33 +1,47 @@
 resource "aws_security_group" "sal-mongo_sg" {
-  name        = "mongo-security-group"
-  description = "Allow MongoDB traffic"
-  vpc_id      = var.vpc_id
+  name        = "sal-mongo_sg"
+  description = "Security group for MongoDB"
+  vpc_id      = "vpc-09f02049d6176fe30"
 
   ingress {
     from_port   = 27017
     to_port     = 27017
     protocol    = "tcp"
-    cidr_blocks = ["10.0.0.0/16"] # Allow internal access
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
 resource "aws_security_group" "sal-backend_sg" {
-  name        = "backend-security-group"
-  description = "Allow backend traffic"
-  vpc_id      = var.vpc_id
+  name        = "sal-backend_sg"
+  description = "Security group for Backend"
+  vpc_id      = "vpc-09f02049d6176fe30"
 
   ingress {
     from_port   = 3001
     to_port     = 3001
     protocol    = "tcp"
-    cidr_blocks = ["10.0.0.0/16"]
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
 resource "aws_security_group" "sal-frontend_sg" {
-  name        = "frontend-security-group"
-  description = "Allow frontend traffic"
-  vpc_id      = var.vpc_id
+  name        = "sal-frontend_sg"
+  description = "Security group for Frontend"
+  vpc_id      = "vpc-09f02049d6176fe30"
 
   ingress {
     from_port   = 3000
@@ -35,30 +49,27 @@ resource "aws_security_group" "sal-frontend_sg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 resource "aws_security_group" "sal-jenkins_sg" {
-  name        = "jenkins-security-group"
-  description = "Allow Jenkins traffic"
-  vpc_id      = var.vpc_id
+  name        = "sal-jenkins_sg"
+  description = "Security group for Jenkins"
+  vpc_id      = "vpc-09f02049d6176fe30"
 
-  # Allow Jenkins access
   ingress {
     from_port   = 8080
     to_port     = 8080
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]  # Open for public access (Adjust as needed)
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
-  # Allow SSH access
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]  # Open for SSH access (Restrict in production)
-  }
-
-  # Allow all outbound traffic
   egress {
     from_port   = 0
     to_port     = 0

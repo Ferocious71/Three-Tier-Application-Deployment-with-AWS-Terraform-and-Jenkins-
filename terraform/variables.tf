@@ -2,29 +2,21 @@ variable "aws_region" {
   default = "us-east-1"
 }
 
+variable "key_name" {
+  description = "SSH key name"
+  type        = string
+}
+
 variable "instance_type" {
-  default = "t2.micro"
+  description = "Instance type for backend and frontend"
+  type        = string
+  default     = "t2.micro"
 }
 
 variable "jenkins_instance_type" {
-  default = "t3.medium"
-}
-
-
-variable "backend_security_group" {
-  type = string
-}
-
-variable "frontend_security_group" {
-  type = string
-}
-
-variable "mongo_security_group" {
-  type = string
-}
-
-variable "key_name" {
-  type = string
+  description = "Instance type for Jenkins"
+  type        = string
+  default     = "t3.medium"
 }
 
 
