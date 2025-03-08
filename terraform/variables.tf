@@ -11,10 +11,22 @@ variable "jenkins_instance_type" {
 }
 
 
-variable "mongo_security_group" {}
-variable "backend_security_group" {}
-variable "frontend_security_group" {}
-variable "key_name" {}
+variable "backend_security_group" {
+  type = string
+}
+
+variable "frontend_security_group" {
+  type = string
+}
+
+variable "mongo_security_group" {
+  type = string
+}
+
+variable "key_name" {
+  type = string
+}
+
 
 variable "vpc_id" {
   default = "vpc-09f02049d6176fe30"  # Replace with your Default VPC ID

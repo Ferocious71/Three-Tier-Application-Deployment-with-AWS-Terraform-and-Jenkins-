@@ -1,7 +1,7 @@
 resource "aws_instance" "mongodb" {
-  ami           = "ami-04b4f1a9cf54c11d0"  # Replace with your region's AMI
+  ami           = "ami-04b4f1a9cf54c11d0"
   instance_type = var.instance_type
-  security_groups = [aws_security_group.mongo_sg.name]
+  security_groups = [aws_security_group.sal-mongo_sg.id] # Fixed
   key_name      = var.key_name
 
   user_data = file("scripts/mongo_setup.sh")
@@ -14,7 +14,7 @@ resource "aws_instance" "mongodb" {
 resource "aws_instance" "backend" {
   ami           = "ami-04b4f1a9cf54c11d0"
   instance_type = var.instance_type
-  security_groups = [aws_security_group.backend_sg.name]
+  security_groups = [aws_security_group.sal-backend_sg.id] # Fixed
   key_name      = var.key_name
 
   user_data = file("scripts/backend_setup.sh")
@@ -27,10 +27,9 @@ resource "aws_instance" "backend" {
 resource "aws_instance" "frontend" {
   ami           = "ami-04b4f1a9cf54c11d0"
   instance_type = var.instance_type
-  security_groups = [aws_security_group.frontend_sg.id]
+  security_groups = [aws_security_group.sal-frontend_sg.id] # Fixed
   key_name      = var.key_name
 
-  # Pass the backend private IP to the user data script
   user_data = templatefile("scripts/frontend_setup.sh", {
     backend_private_ip = aws_instance.backend.private_ip
   })
@@ -40,18 +39,15 @@ resource "aws_instance" "frontend" {
   }
 }
 
-
 resource "aws_instance" "jenkins" {
-  ami           = "ami-04b4f1a9cf54c11d0"  # Replace with your AMI
+  ami           = "ami-04b4f1a9cf54c11d0"
   instance_type = var.jenkins_instance_type
-  security_groups = [aws_security_group.jenkins_sg.id]
+  security_groups = [aws_security_group.sal-jenkins_sg.id] # Fixed
   key_name      = var.key_name
 
-  user_data = file("scripts/jenkins_install.sh")  # Automate Jenkins installation
+  user_data = file("scripts/jenkins_install.sh")
 
   tags = {
     Name = "Sal-Jenkins-Instance"
   }
 }
-
-
