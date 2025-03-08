@@ -1,10 +1,17 @@
-const mongoose = require('mongoose')
-const URL = process.env.MONGO_URI
+require("dotenv").config(); // Load environment variables
+const mongoose = require("mongoose");
 
-mongoose.connect(URL)
-mongoose.Promise = global.Promise
+const connectDB = async () => {
+    try {
+        await mongoose.connect(process.env.MONGO_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        console.log("✅ MongoDB Connected Successfully!");
+    } catch (error) {
+        console.error("❌ MongoDB Connection Error:", error);
+        process.exit(1);
+    }
+};
 
-const db = mongoose.connection
-db.on('error', console.error.bind(console, 'DB ERROR: '))
-
-module.exports = {db, mongoose}
+module.exports = connectDB;

@@ -1,0 +1,59 @@
+pipeline {
+    agent any
+
+    environment {
+        BACKEND_REPO  = 'https://github.com/Ferocious71/Three-Tier-Application-Deployment-with-AWS-Terraform-and-Jenkins-.git'
+        FRONTEND_REPO = 'https://github.com/Ferocious71/Three-Tier-Application-Deployment-with-AWS-Terraform-and-Jenkins-.git'
+        BACKEND_DIR   = 'backend'
+        FRONTEND_DIR  = 'frontend'
+        SSH_KEY       = 'sal_instance_new'  // Jenkins credential ID for SSH
+    }
+
+    stages {
+        stage('Clone Repositories') {
+            steps {
+                sh "git clone ${BACKEND_REPO} ${BACKEND_DIR}"
+                sh "git clone ${FRONTEND_REPO} ${FRONTEND_DIR}"
+            }
+        }
+        
+        stage('Provision Infrastructure') {
+            steps {
+                dir('terraform') { // Ensure Terraform commands run inside the correct directory
+                    sh 'terraform init'
+                    sh 'terraform apply -auto-approve'
+                }
+            }
+        }
+        
+        stage('Deploy Backend') {
+            steps {
+                script {
+                    def backend_ip = sh(script: "terraform output -raw backend_private_ip", returnStdout: true).trim()
+                }
+
+                sshagent([SSH_KEY]) {
+                    sh """
+                        scp -r ${BACKEND_DIR} ubuntu@${backend_ip}:/home/ubuntu/
+                        ssh ubuntu@${backend_ip} "cd /home/ubuntu/${BACKEND_DIR} && npm install && npm start"
+                    """
+                }
+            }
+        }
+
+        stage('Deploy Frontend') {
+            steps {
+                script {
+                    def frontend_ip = sh(script: "terraform output -raw frontend_public_ip", returnStdout: true).trim()
+                }
+
+                sshagent([SSH_KEY]) {
+                    sh """
+                        scp -r ${FRONTEND_DIR} ubuntu@${frontend_ip}:/var/www/html/
+                        ssh ubuntu@${frontend_ip} "cd /var/www/html/${FRONTEND_DIR} && npm install && npm run build"
+                    """
+                }
+            }
+        }
+    }
+}
