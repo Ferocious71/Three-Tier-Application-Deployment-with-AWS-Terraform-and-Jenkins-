@@ -6,6 +6,11 @@ variable "instance_type" {
   default = "t2.micro"
 }
 
+variable "jenkins_instance_type" {
+  default = "t3.medium"
+}
+
+
 variable "mongo_security_group" {}
 variable "backend_security_group" {}
 variable "frontend_security_group" {}

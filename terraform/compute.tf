@@ -43,7 +43,7 @@ resource "aws_instance" "frontend" {
 
 resource "aws_instance" "jenkins" {
   ami           = "ami-04b4f1a9cf54c11d0"  # Replace with your AMI
-  instance_type = "t3.medium"
+  instance_type = var.jenkins_instance_type
   security_groups = [aws_security_group.jenkins_sg.id]
   key_name      = var.key_name
 
