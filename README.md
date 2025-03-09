@@ -38,3 +38,10 @@ CI/CD Pipeline:
 2. Include stages for infrastructure provisioning and application deployment
 3. Add validation and testing stages
 4. Manage application code deployment directly from Jenkins
+
+- Jenkins Running
+![image](https://github.com/user-attachments/assets/79050a8d-b532-43be-98f6-8b20be6c6540)
+
+![image](https://github.com/user-attachments/assets/7e228ac8-8382-4303-b5e3-b74dd62f0033)
+
+
