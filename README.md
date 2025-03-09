@@ -1,32 +1,42 @@
-# Travel Memory
+![image](https://github.com/user-attachments/assets/a6a43e6e-5a90-4db4-ab44-8910720a2106)# Three-Tier Application Deployment with AWS, Terraform, and Jenkins
 
-`.env` file to work with the backend after creating a database in mongodb: 
+AWS Infrastructure:
 
-```
-MONGO_URI='ENTER_YOUR_URL'
-PORT=3001
-```
+1. Use the default VPC and existing subnets for simplicity
+2. Deploy EC2 instances for each tier with appropriate security groups
+3. Implement proper network isolation between tiers
+4. Configure instances using Terraform user data or provisioners
 
-Data format to be added: 
+- Instance Created 
+![image](https://github.com/user-attachments/assets/ada042b5-1c0b-4f2a-89c0-dc5e6f510155)
 
-```json
-{
-    "tripName": "Incredible India",
-    "startDateOfJourney": "19-03-2022",
-    "endDateOfJourney": "27-03-2022",
-    "nameOfHotels":"Hotel Namaste, Backpackers Club",
-    "placesVisited":"Delhi, Kolkata, Chennai, Mumbai",
-    "totalCost": 800000,
-    "tripType": "leisure",
-    "experience": "Lorem Ipsum, Lorem Ipsum,Lorem Ipsum,Lorem Ipsum,Lorem Ipsum,Lorem Ipsum,Lorem Ipsum,Lorem Ipsum,Lorem Ipsum,Lorem Ipsum,Lorem Ipsum,Lorem Ipsum,Lorem Ipsum,Lorem Ipsum,Lorem Ipsum,Lorem Ipsum,Lorem Ipsum,Lorem Ipsum,Lorem Ipsum,Lorem Ipsum,Lorem Ipsum,Lorem Ipsum,Lorem Ipsum,Lorem Ipsum,Lorem Ipsum,Lorem Ipsum,Lorem Ipsum, ",
-    "image": "https://t3.ftcdn.net/jpg/03/04/85/26/360_F_304852693_nSOn9KvUgafgvZ6wM0CNaULYUa7xXBkA.jpg",
-    "shortDescription":"India is a wonderful country with rich culture and good people.",
-    "featured": true
-}
-```
+![image](https://github.com/user-attachments/assets/ffbd95dc-f9ad-4468-8e78-1b64328ae2bf)
+
+- Resources destroyed
+![image](https://github.com/user-attachments/assets/56e7f079-8d6a-49cb-b9fd-0c762235b54c)
+
+Server Configuration:
+
+1. Configure MongoDB instance with proper security using Terraform
+2. Set up the backend with correct environment variables
+3. Configure the frontend to connect to the backend
+4. Use Terraform provisioners or user data to handle application installation
+
+- Frontend running on EC2 -instance provisioned from Terraform
+![image](https://github.com/user-attachments/assets/bd0e5586-15d2-4d49-aa14-f2cf738f1f24)
+
+- Backend running on EC2 -instance provisioned from Terraform
+![image](https://github.com/user-attachments/assets/53701e78-205d-4e75-ac7a-031f709c215a)
+
+![image](https://github.com/user-attachments/assets/8a105910-5a3b-47ba-a369-3ad1b6fe376c)
+
+- Data persistence int Mongo db
+![image](https://github.com/user-attachments/assets/fd44b7bc-b3ba-43c9-aba9-a7a40b1d1713)
 
 
-For frontend, you need to create `.env` file and put the following content (remember to change it based on your requirements):
-```bash
-REACT_APP_BACKEND_URL=http://localhost:3001
-```
+CI/CD Pipeline:
+
+1. Implement a Jenkins pipeline for automated deployment
+2. Include stages for infrastructure provisioning and application deployment
+3. Add validation and testing stages
+4. Manage application code deployment directly from Jenkins
