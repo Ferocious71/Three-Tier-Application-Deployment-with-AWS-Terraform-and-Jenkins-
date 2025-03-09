@@ -13,9 +13,6 @@ AWS Infrastructure:
 
 ![image](https://github.com/user-attachments/assets/ffbd95dc-f9ad-4468-8e78-1b64328ae2bf)
 
-- Resources destroyed
-![image](https://github.com/user-attachments/assets/56e7f079-8d6a-49cb-b9fd-0c762235b54c)
-
 Server Configuration:
 
 1. Configure MongoDB instance with proper security using Terraform
