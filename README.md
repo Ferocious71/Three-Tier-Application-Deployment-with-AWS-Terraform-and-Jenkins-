@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/a6a43e6e-5a90-4db4-ab44-8910720a2106)# Three-Tier Application Deployment with AWS, Terraform, and Jenkins
+# Three-Tier Application Deployment with AWS, Terraform, and Jenkins
 
 AWS Infrastructure:
 
