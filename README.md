@@ -6,10 +6,9 @@ AWS Infrastructure:
 2. Deploy EC2 instances for each tier with appropriate security groups
 3. Implement proper network isolation between tiers
 4. Configure instances using Terraform user data or provisioners
-5. Total 9 resources created from Terraform (4 Ec2 instance (frontend,backend,mongodb, jenkins), 4-Security Groups, Refrence the Internet Gateway from the VPC mentioned in the Infrastructure)
-
+5. Total 8 resources created from Terraform (4 Ec2 instance (frontend,backend,mongodb, jenkins), 4-Security Groups).
 - Instance Created 
-![image](https://github.com/user-attachments/assets/ada042b5-1c0b-4f2a-89c0-dc5e6f510155)
+![image](https://github.com/user-attachments/assets/1a04f5f1-5f5e-4c6b-89be-902a4313bb72)
 
 ![image](https://github.com/user-attachments/assets/ffbd95dc-f9ad-4468-8e78-1b64328ae2bf)
 
